@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { agregarProductos } from "./productos"
+import './formulario.css'
 
 const ProductoFormulario= () => {
     const [nombre, setNombre] = useState('');
