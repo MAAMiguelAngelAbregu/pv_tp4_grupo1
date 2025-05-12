@@ -1,15 +1,28 @@
 
-
+import { useState, useEffect } from "react"; 
 import ProductoFormulario from "./assets/components/Formulario"
 
 import BuscarProductos from "./assets/components/buscarProductos"
 
 function App() {
+
+const [productos, setProductos] = useState([]);
+
+  const agregarProducto = (producto) => {
+    setProductos([...productos, producto]);
+  };
+
+  //  Este efecto se ejecuta cada vez que cambia el array de productos
+  useEffect(() => {
+    console.log("🟢 Productos actualizados:", productos);
+  }, [productos]);
+
+
   return (
     <div>
-      <h1>Hola a Todos</h1>
+      <h1>Lista De Productos</h1>
       <ProductoFormulario />
-      <BuscarProductos productos={productos}/>{/* ACA EN PRODUCTOS DENTRO DE LAS LLAVES SE DEBE PONER EL NOMBRE DEL ARRAY DE PRODUCTOS */}
+      <BuscarProductos productos={productos} />
     </div>
   )
 }
