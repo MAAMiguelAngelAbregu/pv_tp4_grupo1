@@ -21,7 +21,7 @@ const [productos, setProductos] = useState([]);
   return (
     <div>
       <h1>Lista De Productos</h1>
-      <ProductoFormulario />
+      <ProductoFormulario onAgregar={agregarProducto} />
       <BuscarProductos productos={productos} />
     </div>
   )
