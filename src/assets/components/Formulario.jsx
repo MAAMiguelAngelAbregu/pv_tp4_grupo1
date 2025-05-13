@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { agregarProductos } from "./productos"
+
 import '../css/formulario.css'
 
 
