@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { agregarProductos } from "./productos"
 import '../css/formulario.css'
 
-const ProductoFormulario= () => {
+
+const ProductoFormulario = ({ onAgregar }) => {
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
@@ -11,15 +12,30 @@ const ProductoFormulario= () => {
     
     const cargarDatos = (event) => {
         event.preventDefault(); 
-        agregarProductos(nombre, descripcion, precioUnitario, descuento, stock);
+        
+    const descuentoDecimal = parseFloat(descuento) / 100 || 0;
+    const precioConDescuento = parseFloat(precioUnitario) * (1 - descuentoDecimal);
+    const stockEntero = parseInt(stock);
 
-        setNombre('');
-        setDescripcion('');
-        setPrecioUnitario('');
-        setDescuento(0);
-        setStock('');    
+    const nuevoProducto = {
+      id: crypto.randomUUID(),
+      nombre,
+      descripcion,
+      precioUnitario: parseFloat(precioUnitario),
+      descuento: parseFloat(descuento),
+      precioConDescuento,
+      stock: stockEntero,
     };
 
+    onAgregar(nuevoProducto);
+     // Limpiar campos
+    setNombre('');
+    setDescripcion('');
+    setPrecioUnitario('');
+    setDescuento(0);
+    setStock('');
+  };
+    
     return (
         <div className="formu-container">
         <form onSubmit={cargarDatos}>
