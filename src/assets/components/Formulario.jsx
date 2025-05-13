@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { agregarProductos } from "./productos"
-import './formulario.css'
+import '../css/formulario.css'
 
 const ProductoFormulario= () => {
     const [nombre, setNombre] = useState('');
