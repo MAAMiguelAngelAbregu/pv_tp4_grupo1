@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { agregarProductos } from "./productos"
 import '../css/formulario.css'
 
 
-const ProductoFormulario = ({ onAgregar }) => {
+const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
     const [descuento, setDescuento] = useState(0);
     const [stock, setStock] = useState('');
     
+    useEffect(() => {
+        if (productoEditando) {
+            setNombre(productoEditando.nombre);
+            setDescripcion(productoEditando.descripcion);
+            setPrecioUnitario(productoEditando.precioUnitario);
+            setDescuento(productoEditando.descuento);
+            setStock(productoEditando.stock);
+        }
+    }, [productoEditando]);
+
     const cargarDatos = (event) => {
         event.preventDefault(); 
         
@@ -17,8 +27,8 @@ const ProductoFormulario = ({ onAgregar }) => {
     const precioConDescuento = parseFloat(precioUnitario) * (1 - descuentoDecimal);
     const stockEntero = parseInt(stock);
 
-    const nuevoProducto = {
-      id: crypto.randomUUID(),
+    const productoFinal = {
+      id: productoEditando ? productoEditando.id : crypto.randomUUID(),
       nombre,
       descripcion,
       precioUnitario: parseFloat(precioUnitario),
@@ -27,7 +37,13 @@ const ProductoFormulario = ({ onAgregar }) => {
       stock: stockEntero,
     };
 
-    onAgregar(nuevoProducto);
+    if (productoEditando){ 
+        onEditar(productoFinal);
+    }
+    else
+    {
+    onAgregar(productoFinal);
+    }
      // Limpiar campos
     setNombre('');
     setDescripcion('');
@@ -78,7 +94,9 @@ const ProductoFormulario = ({ onAgregar }) => {
                 onChange={(e) => setStock(e.target.value)}
                 required
             />
-            <button type="submit">Agregar Producto</button>
+            <button type="submit">
+          {productoEditando ? "Guardar Cambios" : "Agregar Producto"}
+        </button>
         </form>
         </div>
     );
