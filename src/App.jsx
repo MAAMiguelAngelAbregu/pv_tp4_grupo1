@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProductoFormulario from "./assets/components/Formulario"
 
 import BuscarProductos from "./assets/components/buscarProductos"
+import ListarProducto from "./assets/components/ProductList"
 
 function App() {
 
@@ -39,11 +40,11 @@ const [productos, setProductos] = useState([]);
       <ProductoFormulario onAgregar={agregarProducto} 
       onEditar={editarProducto} 
       productoEditando={productoEditando}/>
-
+      <ListarProducto productos={productos} />
       <BuscarProductos productos={productos} 
       onEditarSeleccion={seleccionarProductoParaEditar}/>
     </div>
   )
 }
 
-export default App
+export default App;
