@@ -6,6 +6,21 @@ import BuscarProductos from "./assets/components/buscarProductos"
 
 function App() {
 
+const [productoEditando, setProductoEditando] = useState(null);
+
+const editarProducto = (productoActualizado) => {
+  setProductos(productos.map(p => 
+    p.id === productoActualizado.id ? productoActualizado : p
+  ));
+  setProductoEditando(null); // limpiar el modo edición
+};
+
+const seleccionarProductoParaEditar = (producto) => {
+  setProductoEditando(producto);
+};
+
+
+
 const [productos, setProductos] = useState([]);
 
   const agregarProducto = (producto) => {
@@ -14,15 +29,19 @@ const [productos, setProductos] = useState([]);
 
   //  Este efecto se ejecuta cada vez que cambia el array de productos
   useEffect(() => {
-    console.log("🟢 Productos actualizados:", productos);
+    console.log(" Productos actualizados:", productos);
   }, [productos]);
 
 
   return (
     <div>
       <h1>Lista De Productos</h1>
-      <ProductoFormulario onAgregar={agregarProducto} />
-      <BuscarProductos productos={productos} />
+      <ProductoFormulario onAgregar={agregarProducto} 
+      onEditar={editarProducto} 
+      productoEditando={productoEditando}/>
+
+      <BuscarProductos productos={productos} 
+      onEditarSeleccion={seleccionarProductoParaEditar}/>
     </div>
   )
 }
