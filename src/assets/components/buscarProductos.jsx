@@ -1,15 +1,12 @@
-
-import { useState, useMemo } from "react";
+import { useState } from "react";
 
 function BuscarProductos({productos, onEditarSeleccion})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY DE PRODUCTOS
 {
     const [buscarProd,setBuscarProd] = useState(''); //SE USA PARA GUARDAR CADA CAMBIO EN LA BUSQUEDA Y BUSCAR
 
-    const filtrarProductos = useMemo(() => {
-    return productos.filter(p =>
+    const filtrarProductos =  productos.filter(p =>
         p.nombre.toLowerCase().includes(buscarProd.toLowerCase()) || p.descripcion.toLowerCase().includes(buscarProd.toLowerCase())
     );
-    }, [productos, buscarProd]);
 
     return(
          <div>
@@ -30,6 +27,6 @@ function BuscarProductos({productos, onEditarSeleccion})  //FUNCION RECIBE COMO 
       </ul>
     </div>
     );
-}
+};
 
 export default BuscarProductos;
