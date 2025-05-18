@@ -1,7 +1,7 @@
 
 import { useState, useMemo } from "react";
 
-function BuscarProductos({productos})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY DE PRODUCTOS
+function BuscarProductos({productos, onEditarSeleccion})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY DE PRODUCTOS
 {
     const [buscarProd,setBuscarProd] = useState(''); //SE USA PARA GUARDAR CADA CAMBIO EN LA BUSQUEDA Y BUSCAR
 
@@ -15,14 +15,16 @@ function BuscarProductos({productos})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY 
          <div>
       <input
         type="text"
-        placeholder="Buscar por nombre o descripción"
+        placeholder="Buscar por nombre o marca"
         value={buscarProd}
         onChange={(e) => setBuscarProd(e.target.value)}
       />
       <ul>
         {filtrarProductos.map(producto => (
           <li key={producto.id}>
-            {producto.nombre} - {producto.descripcion} - ${producto.precioConDescuento.toFixed(2)} - Stock: {producto.stock}
+            {producto.nombre} - {producto.marca} - ${producto.precioConDescuento.toFixed(2)} - Stock: {producto.stock}
+            <button onClick={() => onEditarSeleccion(producto)} className="boton-chico"
+              >Editar Producto</button>
           </li>
         ))}
       </ul>

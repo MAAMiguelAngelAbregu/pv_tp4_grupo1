@@ -5,15 +5,15 @@ import '../css/formulario.css'
 
 const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     const [nombre, setNombre] = useState('');
-    const [descripcion, setDescripcion] = useState('');
+    const [marca, setMarca] = useState('');
     const [precioUnitario, setPrecioUnitario] = useState('');
-    const [descuento, setDescuento] = useState(0);
+    const [descuento, setDescuento] = useState('');
     const [stock, setStock] = useState('');
     
     useEffect(() => {
         if (productoEditando) {
             setNombre(productoEditando.nombre);
-            setDescripcion(productoEditando.descripcion);
+            setMarca(productoEditando.marca);
             setPrecioUnitario(productoEditando.precioUnitario);
             setDescuento(productoEditando.descuento);
             setStock(productoEditando.stock);
@@ -30,7 +30,7 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     const productoFinal = {
       id: productoEditando ? productoEditando.id : crypto.randomUUID(),
       nombre,
-      descripcion,
+      marca,
       precioUnitario: parseFloat(precioUnitario),
       descuento: parseFloat(descuento),
       precioConDescuento,
@@ -46,9 +46,9 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     }
      // Limpiar campos
     setNombre('');
-    setDescripcion('');
+    setMarca('');
     setPrecioUnitario('');
-    setDescuento(0);
+    setDescuento('');
     setStock('');
   };
     
@@ -65,10 +65,10 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
             />
             <input
                 type="text"
-                placeholder='Descripción del producto'
-                id="descripcion"
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
+                placeholder='Marca del producto'
+                id="marca"
+                value={marca}
+                onChange={(e) => setMarca(e.target.value)}
                 required
             />            
             <input
