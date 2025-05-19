@@ -1,0 +1,28 @@
+.container-principal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.container-buscar-secundario button{
+    margin: 5px;
+    width: 80px;
+    height: 40px;
+    font-size: 15px;
+    padding: 3px 5px;
+}
+.container-buscar-secundario ul li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-buscar{
+    padding-top: 10px;
+    padding-left: 5px;
+}
+
+.container-formulario{
+    border-right: 1px solid black;
+    padding-right: 25px;
+}

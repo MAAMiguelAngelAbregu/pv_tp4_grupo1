@@ -1,15 +1,11 @@
-import React from "react";
-function productoItem({producto, onEditarSeleccion }){
+
+function ProductoItem({producto}){
     return(
         <li>
-            {producto.nombre} - {producto.marca} -
-            ${producto.precioConDescuento.toFixed(2)} - stock: {producto.stock}
-            <button onClick={() => onEditarSeleccion(producto)} className="boton-chico">
-                Modificar 
-            </button>
-
+            Id: {producto.id} - Nombre: {producto.nombre} - Marca: {producto.marca} -
+            Descuento: ${producto.precioConDescuento.toFixed(2)} - Stock: {producto.stock}
         </li>
         
     );
 }
-export default productoItem;
+export default ProductoItem;

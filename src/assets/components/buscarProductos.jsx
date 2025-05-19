@@ -1,29 +1,35 @@
 import { useState } from "react";
+import DeleteProductos from "./productDelete";
 
-function BuscarProductos({productos, onEditarSeleccion})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY DE PRODUCTOS
+function BuscarProductos({productos, onEditarSeleccion,nprod})  //FUNCION RECIBE COMO PARAMETRO EL ARRAY DE PRODUCTOS
 {
     const [buscarProd,setBuscarProd] = useState(''); //SE USA PARA GUARDAR CADA CAMBIO EN LA BUSQUEDA Y BUSCAR
 
     const filtrarProductos =  productos.filter(p =>
-        p.nombre.toLowerCase().includes(buscarProd.toLowerCase()) || p.descripcion.toLowerCase().includes(buscarProd.toLowerCase())
+        p.nombre.toLowerCase().includes(buscarProd.toLowerCase()) || p.id === parseInt(buscarProd)
     );
 
+    const nuevoprod = (nuevo)=>{
+      nprod(nuevo);
+    }
+
     return(
-         <div>
+         <div className="container-buscar-secundario">
       <input
         type="text"
-        placeholder="Buscar por nombre o marca"
+        placeholder="Buscar por nombre o id"
         value={buscarProd}
         onChange={(e) => setBuscarProd(e.target.value)}
       />
       <ul>
-        {filtrarProductos.map(producto => (
+        {filtrarProductos.map(producto => producto.estado == true ? (
           <li key={producto.id}>
-            {producto.nombre} - {producto.marca} - ${producto.precioConDescuento.toFixed(2)} - Stock: {producto.stock}
-            <button onClick={() => onEditarSeleccion(producto)} className="boton-chico"
-              >Editar Producto</button>
+          Id: {producto.id} - Nombre: {producto.nombre} - Marca: {producto.marca} -
+            Descuento: ${producto.precioConDescuento.toFixed(2)} - Stock: {producto.stock}
+            <button onClick={() => onEditarSeleccion(producto)} className="boton-chico">Editar</button>
+            <DeleteProductos pid={producto.id} productosArray={productos} nuevoproducto={nuevoprod} />
           </li>
-        ))}
+        ) : '' )}
       </ul>
     </div>
     );
