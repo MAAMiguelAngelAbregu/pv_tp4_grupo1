@@ -1,6 +1,5 @@
 
 import React, { useState , useEffect } from 'react'
-import { agregarProductos } from "./productos"
 import '../css/formulario.css'
 
 
@@ -10,6 +9,7 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     const [precioUnitario, setPrecioUnitario] = useState('');
     const [descuento, setDescuento] = useState('');
     const [stock, setStock] = useState('');
+    const [id,setId] = useState(1);
     
     useEffect(() => {
         if (productoEditando) {
@@ -21,6 +21,7 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
         }
     }, [productoEditando]);
 
+
     const cargarDatos = (event) => {
         event.preventDefault(); 
         
@@ -29,13 +30,14 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     const stockEntero = parseInt(stock);
 
     const productoFinal = {
-      id: productoEditando ? productoEditando.id : crypto.randomUUID(),
+      id: productoEditando ? productoEditando.id : id,
       nombre,
       marca,
       precioUnitario: parseFloat(precioUnitario),
       descuento: parseFloat(descuento),
       precioConDescuento,
       stock: stockEntero,
+      estado: true
     };
 
     if (productoEditando){ 
@@ -44,6 +46,7 @@ const ProductoFormulario = ({ onAgregar , onEditar , productoEditando}) => {
     else
     {
     onAgregar(productoFinal);
+    setId(id+1)
     }
      // Limpiar campos
     setNombre('');

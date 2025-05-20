@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import ProductoItem from "./productoItem";
 
 function ListarProducto({ productos }) { 
   const [mostrarLista, setMostrarLista] = useState(false);
@@ -31,11 +31,7 @@ function ListarProducto({ productos }) {
         )}
         {mostrarLista && (
           <ul>
-            {productos.map((productos) => (
-              <li>
-              Nombre :{productos.nombre} - Descripcion :{productos.descripcion} - Precio Con Descuento :${productos.precioConDescuento && productos.precioConDescuento.toFixed(2)} - Stock: {productos.stock}
-             </li>
-              ))}
+            {productos.map((p) => p.estado === true ? (<li><ProductoItem producto={p}/></li>) : '')}
           </ul>
         )}
       </div>
